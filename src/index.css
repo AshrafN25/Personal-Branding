@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-primary: #0F0F0F;
+  --bg-secondary: #1A1A1A;
+  --bg-card: #1E1E1E;
+  --bg-card-hover: #2A2A2A;
+  --accent-gold: #F1B800;
+  --accent-orange: #FFA500;
+  --accent-purple: #8B5CF6;
+  --accent-blue: #3B82F6;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B3B3B3;
+  --border: #2A2A2A;
+  --glow-gold: rgba(241, 184, 0, 0.15);
+  --glow-gold-strong: rgba(241, 184, 0, 0.3);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; border: none; outline: none; font-family: 'Inter', sans-serif; }
+
+::-webkit-scrollbar { 
+  width: 10px; 
+}
+
+::-webkit-scrollbar-track { 
+  background: var(--bg-secondary); 
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb { 
+  background: var(--accent-gold); 
+  border-radius: 5px; 
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-orange);
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-gold) var(--bg-secondary);
+}
+
+::selection { 
+  background: var(--accent-gold); 
+  color: var(--bg-primary); 
+}
+
+/* ── Layout ── */
+.section { padding: 80px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+.section-title span { color: var(--accent-gold); }
+.section-subtitle { color: var(--text-secondary); font-size: 1rem; margin-bottom: 48px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(241, 184, 0, 0.1);
+  border: 1px solid rgba(241, 184, 0, 0.3);
+  color: var(--accent-gold);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-gold); color: var(--bg-primary);
+  padding: 12px 28px; border-radius: 8px;
+  font-weight: 700; font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(241, 184, 0, 0.2);
+}
+.btn-primary:hover {
+  background: var(--accent-orange);
+  box-shadow: 0 0 30px rgba(241, 184, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--text-primary);
+  padding: 12px 28px; border-radius: 8px;
+  font-weight: 600; font-size: 0.95rem;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  transform: translateY(-2px);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-divider {
+  width: 60px; height: 4px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+  border-radius: 2px; margin-bottom: 48px;
+  box-shadow: 0 0 12px rgba(241, 184, 0, 0.5);
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px;
+  transition: all 0.3s ease;
+}
+.card:hover {
+  border-color: rgba(241, 184, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(241, 184, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+@media (max-width: 768px) {
+  .section { padding: 60px 0; }
+  .container { padding: 0 16px; }
+}
+
+/* ══════════════════════════════════════════════════
+   ALTERNATING SECTION BACKGROUNDS
+   Odd  (home, skills, cv)     → dark + gold glow
+   Even (about, portfolio)     → slightly lighter dark
+   Smooth fade between them via ::before overlay
+   ══════════════════════════════════════════════════ */
+
+/* Base for all sections */
+.app > main > section {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── GLOW sections: Home & Skills & CV ── */
+.section-glow {
+  background: #0F0F0F;
+}
+
+.section-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 70% at 85% 20%, rgba(241,184,0,0.11) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 60% at 10% 80%, rgba(255,165,0,0.07) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  /* fade in smoothly as section enters viewport */
+  animation: sectionGlowPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes sectionGlowPulse {
+  from { opacity: 0.7; }
+  to   { opacity: 1;   }
+}
+
+/* ── DARK sections: About & Portfolio ── */
+.section-dark {
+  background: #131313;
+}
+
+.section-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(241,184,0,0.025) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Divider fade between sections — top edge fades from previous bg */
+.section-dark::after,
+.section-glow::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 80px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.section-dark::after {
+  background: linear-gradient(to bottom, #0F0F0F, transparent);
+}
+
+.section-glow::after {
+  background: linear-gradient(to bottom, #131313, transparent);
+}
+
+/* First section (hero) has no top fade */
+#home.section-glow::after {
+  display: none;
+}
+
+/* Make sure section content sits above ::before */
+.section-glow > *,
+.section-dark > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════════════════
+   ENTRANCE ANIMATIONS - Fade In & Slide Up
+   ══════════════════════════════════════════════════ */
+
+/* Base animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Initial state - sections start invisible */
+.section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* When section comes into view */
+.section.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero section loads immediately */
+#home {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* Animate section headers */
+.section-header {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s;
+}
+
+.section.animate-in .section-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animate cards with stagger effect */
+.card {
+  opacity: 0;
+  transform: scale(0.95) translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.section.animate-in .card {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Stagger card animations */
+.section.animate-in .card:nth-child(1) { transition-delay: 0.1s; }
+.section.animate-in .card:nth-child(2) { transition-delay: 0.15s; }
+.section.animate-in .card:nth-child(3) { transition-delay: 0.2s; }
+.section.animate-in .card:nth-child(4) { transition-delay: 0.25s; }
+.section.animate-in .card:nth-child(5) { transition-delay: 0.3s; }
+.section.animate-in .card:nth-child(6) { transition-delay: 0.35s; }
+.section.animate-in .card:nth-child(7) { transition-delay: 0.4s; }
+.section.animate-in .card:nth-child(8) { transition-delay: 0.45s; }
+.section.animate-in .card:nth-child(9) { transition-delay: 0.5s; }
+.section.animate-in .card:nth-child(10) { transition-delay: 0.55s; }
+.section.animate-in .card:nth-child(11) { transition-delay: 0.6s; }
+.section.animate-in .card:nth-child(12) { transition-delay: 0.65s; }
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .section,
+  .card,
+  .section-header {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
