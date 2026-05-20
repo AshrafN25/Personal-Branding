@@ -334,8 +334,8 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-height: 800px;
-  overflow-y: auto;
+  max-height: none; /* Remove max-height from wrapper */
+  overflow: visible; /* No scroll on wrapper */
 }
 
 /* Custom scrollbar for comments */
@@ -466,6 +466,28 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-height: 500px; /* Fixed height for comments list */
+  overflow-y: auto; /* Scroll only on comments list */
+  padding-right: 8px; /* Space for scrollbar */
+}
+
+/* Custom scrollbar for comments list */
+.comments-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.comments-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 3px;
+}
+
+.comments-list::-webkit-scrollbar-thumb {
+  background: rgba(241, 184, 0, 0.3);
+  border-radius: 3px;
+}
+
+.comments-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(241, 184, 0, 0.5);
 }
 
 /* ── Comment Item ── */
@@ -595,6 +617,10 @@
   .comments-wrapper {
     max-height: none;
   }
+  
+  .comments-list {
+    max-height: 400px; /* Smaller on tablet */
+  }
 }
 
 /* ── Responsive ── */
@@ -623,6 +649,10 @@
 
   .comments-wrapper {
     padding: 24px;
+  }
+
+  .comments-list {
+    max-height: 350px; /* Smaller on mobile */
   }
 
   .comment-avatar {
