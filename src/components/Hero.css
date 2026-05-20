@@ -469,13 +469,13 @@
     width: 140px;
     height: 140px;
     bottom: -35px;
-    left: 10px; /* Lebih ke kanan */
+    left: 30px; /* Lebih ke kanan */
   }
   .hero-circle-static {
     width: 90px;
     height: 90px;
     top: -25px;
-    right: 40px; /* Lebih ke kiri */
+    right: 55px; /* Lebih ke kiri */
   }
 }
 
