@@ -53,10 +53,6 @@ export default function Hero() {
       <div className="hero-blob hero-blob-1" />
       <div className="hero-blob hero-blob-2" />
 
-      {/* Decorative circles - in background */}
-      <div className="hero-circle hero-circle-rotating" />
-      <div className="hero-circle hero-circle-static" />
-
       <div className="container hero-container">
         {/* Left Content */}
         <div className="hero-content">
@@ -107,6 +103,10 @@ export default function Hero() {
 
         {/* Right — Photo */}
         <div className="hero-photo-wrap">
+          {/* Decorative circles - relative to photo */}
+          <div className="hero-circle hero-circle-rotating" />
+          <div className="hero-circle hero-circle-static" />
+          
           <div className="photo-card">
             {/* Corner brackets (visible on hover) */}
             <span className="corner corner-tl" />

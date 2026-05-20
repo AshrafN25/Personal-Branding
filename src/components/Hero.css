@@ -175,6 +175,7 @@
 
 /* ── Photo Section ── */
 .hero-photo-wrap {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -189,6 +190,7 @@
   border-radius: 24px;
   overflow: hidden;
   cursor: pointer;
+  z-index: 2;
 
   /* default: tilted RIGHT + grayscale */
   transform: rotate(6deg);
@@ -404,30 +406,34 @@
   }
 }
 
-/* ── Decorative Circles (in hero background) ── */
+/* ── Decorative Circles (relative to photo) ── */
+.hero-photo-wrap {
+  position: relative;
+}
+
 .hero-circle {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
-/* Rotating circle - bottom left area of photo */
+/* Rotating circle - bottom left of photo */
 .hero-circle-rotating {
   width: 200px;
   height: 200px;
-  bottom: 120px;
-  right: 730px;
+  bottom: -55px;
+  left: -60px;
   border: 3px dashed rgba(150, 150, 150, 0.2);
   animation: rotateCircle 20s linear infinite;
 }
 
-/* Static circle - top right area of photo */
+/* Static circle - top right of photo */
 .hero-circle-static {
   width: 120px;
   height: 120px;
-  top: 180px;
-  right: 370px;
+  top: -30px;
+  right: -35px;
   background: rgba(241, 184, 0, 0.12);
   border: 3px solid rgba(241, 184, 0, 0.4);
   box-shadow: 0 0 30px rgba(241, 184, 0, 0.2);
@@ -439,5 +445,51 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Responsive adjustments for circles */
+@media (max-width: 1024px) {
+  .hero-circle-rotating {
+    width: 160px;
+    height: 160px;
+    bottom: -30px;
+    left: -50px; /* Lebih ke kanan */
+  }
+  .hero-circle-static {
+    width: 100px;
+    height: 100px;
+    top: -20px;
+    right: -20px; /* Lebih ke kiri */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-circle-rotating {
+    width: 140px;
+    height: 140px;
+    bottom: -35px;
+    left: 10px; /* Lebih ke kanan */
+  }
+  .hero-circle-static {
+    width: 90px;
+    height: 90px;
+    top: -25px;
+    right: 40px; /* Lebih ke kiri */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-circle-rotating {
+    width: 120px;
+    height: 120px;
+    bottom: -20px;
+    left: -35px; /* Lebih ke kanan */
+  }
+  .hero-circle-static {
+    width: 80px;
+    height: 80px;
+    top: -10px;
+    right: -10px; /* Lebih ke kiri */
   }
 }
