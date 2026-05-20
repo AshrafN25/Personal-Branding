@@ -44,6 +44,25 @@ const projects = [
   },
   {
     id: 3,
+    title: 'Era Reformasi - Sejarah Indonesia',
+    desc: 'Website interaktif tentang sejarah Era Reformasi Indonesia dengan desain modern dan elegan.',
+    fullDesc: 'Website interaktif yang menampilkan perjalanan sejarah Era Reformasi Indonesia dari keberanian menuju demokrasi. Dilengkapi dengan timeline peristiwa penting, tokoh-tokoh reformasi, dan dampak reformasi terhadap Indonesia modern dengan desain yang mencerminkan semangat perubahan.',
+    features: [
+      'Timeline interaktif peristiwa reformasi',
+      'Profil tokoh-tokoh reformasi',
+      'Dokumentasi foto dan video sejarah',
+      'Desain modern dengan tema patriotik',
+      'Navigasi smooth scrolling',
+      'Responsive design untuk semua perangkat',
+    ],
+    techCount: 3,
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    image: '/era-reformasi.jpg',
+    github: 'https://github.com/AshrafN25/era-reformasi',
+    demo: 'https://era-reformasi.vercel.app',
+  },
+  {
+    id: 4,
     title: 'My Roti - Shopping Cart',
     desc: 'Website e-commerce sederhana untuk produk roti.',
     fullDesc: 'Website e-commerce sederhana untuk produk roti dengan fitur shopping cart. Menampilkan katalog produk roti, tambah ke keranjang, dan checkout dengan perhitungan total otomatis.',
@@ -61,7 +80,7 @@ const projects = [
     demo: '#',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Website Kuliner Nusantara',
     desc: 'Website sederhana tentang kuliner tradisional Indonesia.',
     fullDesc: 'Website sederhana tentang kuliner tradisional Indonesia. Project pertama saya dalam belajar HTML dan CSS, menampilkan berbagai makanan khas Nusantara.',
@@ -149,6 +168,16 @@ const designs = [
 const certificates = [
   {
     id: 1,
+    title: 'Coding Camp 2026 powered by DBS Foundation - Full-Stack Web Developer',
+    issuer: 'Dicoding Indonesia & DBS Foundation',
+    year: '2026',
+    date: '11 Mei 2026',
+    code: 'CC26/GRAD/XXVI-05/CFS102D6Y280',
+    image: '/certificates/Coding Camp 2026 DBS Foundation.jpg',
+    verifyUrl: null,
+  },
+  {
+    id: 2,
     title: 'Belajar Membuat Aplikasi Web dengan React',
     issuer: 'Dicoding Indonesia',
     year: '2026',
@@ -158,7 +187,7 @@ const certificates = [
     verifyUrl: 'https://www.dicoding.com/certificates/07Z674KR2PQR',
   },
   {
-    id: 2,
+    id: 3,
     title: 'Belajar Back-End Pemula dengan JavaScript',
     issuer: 'Dicoding Indonesia',
     year: '2026',
@@ -168,7 +197,7 @@ const certificates = [
     verifyUrl: 'https://www.dicoding.com/certificates/4EXG17E5DPRL',
   },
   {
-    id: 3,
+    id: 4,
     title: 'Belajar Dasar Pemrograman JavaScript',
     issuer: 'Dicoding Indonesia',
     year: '2026',
@@ -178,7 +207,7 @@ const certificates = [
     verifyUrl: 'https://www.dicoding.com/certificates/NVP7N4YKOZR0',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Belajar Dasar Cloud dan Gen AI di AWS',
     issuer: 'Dicoding Indonesia',
     year: '2026',
@@ -188,7 +217,7 @@ const certificates = [
     verifyUrl: 'https://www.dicoding.com/certificates/KEXL2KJL0ZG2',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Pengenalan ke Logika Pemrograman (Programming Logic 101)',
     issuer: 'Dicoding Indonesia',
     year: '2026',
@@ -198,7 +227,7 @@ const certificates = [
     verifyUrl: 'https://www.dicoding.com/certificates/EYX4IK3E6SPDL',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Memulai Dasar Pemrograman untuk Menjadi Pengembang Software',
     issuer: 'Dicoding Indonesia',
     year: '2026',
@@ -208,7 +237,7 @@ const certificates = [
     verifyUrl: 'https://www.dicoding.com/certificates/MRZM6MJ4RPYQ',
   },
   {
-    id: 7,
+    id: 8,
     title: 'Belajar Dasar Pemrograman Web',
     issuer: 'Dicoding Indonesia',
     year: '2026',
@@ -218,7 +247,7 @@ const certificates = [
     verifyUrl: 'https://www.dicoding.com/certificates/1OP8JQ3LLPQK',
   },
   {
-    id: 8,
+    id: 9,
     title: 'Belajar Membuat Front-End Web untuk Pemula',
     issuer: 'Dicoding Indonesia',
     year: '2026',
@@ -228,7 +257,7 @@ const certificates = [
     verifyUrl: 'https://www.dicoding.com/certificates/QLZ99VDK7Z5D',
   },
   {
-    id: 9,
+    id: 10,
     title: 'Introduction to Financial Literacy',
     issuer: 'Dicoding Indonesia',
     year: '2026',
@@ -238,7 +267,7 @@ const certificates = [
     verifyUrl: 'https://www.dicoding.com/certificates/JMZVO4Q2RXN9',
   },
   {
-    id: 10,
+    id: 11,
     title: 'IT Essentials',
     issuer: 'Cisco Networking Academy',
     year: '2025',
@@ -248,7 +277,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 11,
+    id: 12,
     title: 'Cryptography Basics',
     issuer: 'TryHackMe',
     year: '2026',
@@ -258,7 +287,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 12,
+    id: 13,
     title: 'Breaking Crypto the Simple Way',
     issuer: 'TryHackMe',
     year: '2026',
@@ -268,7 +297,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 13,
+    id: 14,
     title: 'Encryption - Crypto 101',
     issuer: 'TryHackMe',
     year: '2026',
@@ -278,7 +307,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 14,
+    id: 15,
     title: 'Cryptography for Dummies',
     issuer: 'TryHackMe',
     year: '2026',
@@ -288,7 +317,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 15,
+    id: 16,
     title: 'Menciptakan Dampak dengan AI',
     issuer: 'IBM SkillsBuild',
     year: '2025',
@@ -298,7 +327,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 16,
+    id: 17,
     title: 'Membuat Pitch Elevator Menggunakan AI Generatif',
     issuer: 'IBM SkillsBuild',
     year: '2025',
@@ -308,7 +337,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 17,
+    id: 18,
     title: 'Penerapan AI',
     issuer: 'IBM SkillsBuild',
     year: '2025',
@@ -318,7 +347,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 18,
+    id: 19,
     title: 'Bagaimana teknologi digunakan dalam sebuah konser musik?',
     issuer: 'IBM SkillsBuild',
     year: '2025',
@@ -328,7 +357,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 19,
+    id: 20,
     title: 'Menuju Konservasi Berkelanjutan',
     issuer: 'IBM SkillsBuild',
     year: '2025',
@@ -338,7 +367,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 20,
+    id: 21,
     title: 'Hello World: Transformers One',
     issuer: 'Code.org',
     year: '2025',
@@ -348,7 +377,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 21,
+    id: 22,
     title: 'Minecraft Designer',
     issuer: 'Code.org',
     year: '2025',
@@ -358,7 +387,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 22,
+    id: 23,
     title: 'Minecraft Adventurer',
     issuer: 'Code.org',
     year: '2025',
@@ -368,7 +397,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 23,
+    id: 24,
     title: 'Minecraft Hero\'s Journey',
     issuer: 'Code.org',
     year: '2025',
@@ -378,7 +407,7 @@ const certificates = [
     verifyUrl: null,
   },
   {
-    id: 24,
+    id: 25,
     title: 'Music Lab: Jam Session',
     issuer: 'Code.org',
     year: '2025',

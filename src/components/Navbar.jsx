@@ -8,6 +8,7 @@ const navLinks = [
   { id: 'skills', label: 'Skills' },
   { id: 'portfolio', label: 'Portfolio' },
   { id: 'cv', label: 'CV' },
+  { id: 'contact', label: 'Contact' },
 ]
 
 export default function Navbar({ activeSection }) {
