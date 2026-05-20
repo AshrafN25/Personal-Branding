@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
-import { FiExternalLink, FiGithub, FiFolder, FiCode, FiAward, FiLayers, FiImage, FiArrowLeft, FiX, FiZoomIn, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { FiExternalLink, FiGithub, FiFolder, FiCode, FiAward, FiLayers, FiImage, FiArrowLeft } from 'react-icons/fi'
 import './Portfolio.css'
 
 /* ── DATA ── */
@@ -445,46 +446,64 @@ export default function Portfolio() {
   const [activeTab, setActiveTab] = useState('projects')
   const [showAllDesigns, setShowAllDesigns] = useState(false)
   const [showAllCertificates, setShowAllCertificates] = useState(false)
-  const [selectedCert, setSelectedCert] = useState(null)
-  const [certIndex, setCertIndex] = useState(0)
+  const [selectedCertificate, setSelectedCertificate] = useState(null)
+  const [currentCertIndex, setCurrentCertIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
-  const visibleCerts = showAllCertificates ? certificates : certificates.slice(0, 6)
-
-  const openCert = useCallback((cert, index) => {
-    setSelectedCert(cert)
-    setCertIndex(index)
-  }, [])
-
-  const closeCert = useCallback(() => {
-    setSelectedCert(null)
-  }, [])
-
-  const prevCert = useCallback((e) => {
+  // Navigate to previous certificate
+  const handlePrevCert = (e) => {
     e.stopPropagation()
-    const allCerts = showAllCertificates ? certificates : certificates.slice(0, 6)
-    const newIndex = (certIndex - 1 + allCerts.length) % allCerts.length
-    setCertIndex(newIndex)
-    setSelectedCert(allCerts[newIndex])
-  }, [certIndex, showAllCertificates])
+    if (isTransitioning) return
+    
+    setIsTransitioning(true)
+    setTimeout(() => {
+      const visibleCerts = showAllCertificates ? certificates.length : 6
+      const newIndex = currentCertIndex === 0 ? visibleCerts - 1 : currentCertIndex - 1
+      setCurrentCertIndex(newIndex)
+      setSelectedCertificate(certificates[newIndex])
+      setIsTransitioning(false)
+    }, 150)
+  }
 
-  const nextCert = useCallback((e) => {
+  // Navigate to next certificate
+  const handleNextCert = (e) => {
     e.stopPropagation()
-    const allCerts = showAllCertificates ? certificates : certificates.slice(0, 6)
-    const newIndex = (certIndex + 1) % allCerts.length
-    setCertIndex(newIndex)
-    setSelectedCert(allCerts[newIndex])
-  }, [certIndex, showAllCertificates])
+    if (isTransitioning) return
+    
+    setIsTransitioning(true)
+    setTimeout(() => {
+      const visibleCerts = showAllCertificates ? certificates.length : 6
+      const newIndex = currentCertIndex === visibleCerts - 1 ? 0 : currentCertIndex + 1
+      setCurrentCertIndex(newIndex)
+      setSelectedCertificate(certificates[newIndex])
+      setIsTransitioning(false)
+    }, 150)
+  }
 
+  // Keyboard navigation
   useEffect(() => {
-    const handleKey = (e) => {
-      if (!selectedCert) return
-      if (e.key === 'Escape') closeCert()
-      if (e.key === 'ArrowLeft') prevCert(e)
-      if (e.key === 'ArrowRight') nextCert(e)
+    if (!selectedCertificate) return
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedCertificate(null)
+      } else if (e.key === 'ArrowLeft') {
+        handlePrevCert(e)
+      } else if (e.key === 'ArrowRight') {
+        handleNextCert(e)
+      }
     }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [selectedCert, closeCert, prevCert, nextCert])
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedCertificate, currentCertIndex, isTransitioning])
+
+  // Open certificate modal
+  const openCertificate = (cert, index) => {
+    setSelectedCertificate(cert)
+    setCurrentCertIndex(index)
+    setIsTransitioning(false)
+  }
 
   return (
     <section id="portfolio" className="section portfolio-section section-dark">
@@ -610,7 +629,7 @@ export default function Portfolio() {
                 <div 
                   key={c.id} 
                   className="cert-card-image card"
-                  onClick={() => openCert(c, index)}
+                  onClick={() => openCertificate(c, index)}
                   style={{ cursor: 'pointer' }}
                 >
                   <div className="cert-image-wrap">
@@ -621,12 +640,6 @@ export default function Portfolio() {
                         <FiAward size={48} style={{ opacity: 0.3 }} />
                       </div>
                     )}
-                    <div className="cert-overlay">
-                      <div className="cert-overlay-content">
-                        <FiZoomIn size={32} />
-                        <span className="cert-overlay-text">Lihat Sertifikat</span>
-                      </div>
-                    </div>
                   </div>
                   <div className="cert-info">
                     <h3 className="cert-info-title">{c.title}</h3>
@@ -673,64 +686,82 @@ export default function Portfolio() {
         </div>
       </div>
 
-      {/* ── Certificate Lightbox Modal ── */}
-      {selectedCert && (
-        <div className="cert-modal-overlay" onClick={closeCert}>
-          <div className="cert-modal" onClick={(e) => e.stopPropagation()}>
-            {/* Close button */}
-            <button className="cert-modal-close" onClick={closeCert} aria-label="Tutup">
-              <FiX size={20} />
-            </button>
+      {/* Certificate Modal Popup - Using Portal to render at root level */}
+      {selectedCertificate && createPortal(
+        <div 
+          className="cert-modal-overlay"
+          onClick={() => setSelectedCertificate(null)}
+        >
+          {/* Previous Button */}
+          <button 
+            className="cert-modal-nav cert-modal-prev"
+            onClick={handlePrevCert}
+            aria-label="Previous certificate"
+          >
+            <FiArrowLeft size={24} />
+          </button>
 
-            {/* Nav prev */}
-            <button className="cert-modal-nav cert-modal-prev" onClick={prevCert} aria-label="Sebelumnya">
-              <FiChevronLeft size={24} />
+          <div 
+            className="cert-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              className="cert-modal-close"
+              onClick={() => setSelectedCertificate(null)}
+              aria-label="Close"
+            >
+              ✕
             </button>
-
-            {/* Nav next */}
-            <button className="cert-modal-nav cert-modal-next" onClick={nextCert} aria-label="Berikutnya">
-              <FiChevronRight size={24} />
-            </button>
-
-            <div className="cert-modal-content">
-              {selectedCert.image ? (
-                <img
-                  src={selectedCert.image}
-                  alt={selectedCert.title}
-                  className="cert-modal-image"
+            
+            <div className={`cert-modal-image-container ${isTransitioning ? 'transitioning' : ''}`}>
+              {selectedCertificate.image ? (
+                <img 
+                  src={selectedCertificate.image} 
+                  alt={selectedCertificate.title} 
+                  className="cert-modal-image" 
                 />
               ) : (
                 <div className="cert-modal-placeholder">
                   <FiAward size={64} style={{ opacity: 0.3 }} />
-                  <p>Gambar tidak tersedia</p>
+                  <p>No image available</p>
                 </div>
               )}
-
-              <div className="cert-modal-info">
-                <h3 className="cert-modal-title">{selectedCert.title}</h3>
-                <div className="cert-modal-meta">
-                  <span className="cert-modal-issuer">{selectedCert.issuer}</span>
-                  <span className="cert-modal-date">{selectedCert.date || selectedCert.year}</span>
-                </div>
-                {selectedCert.verifyUrl && (
-                  <a
-                    href={selectedCert.verifyUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="cert-modal-verify"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <FiExternalLink size={14} />
-                    Verifikasi Sertifikat
-                  </a>
-                )}
-                <p className="cert-modal-counter">
-                  {certIndex + 1} / {showAllCertificates ? certificates.length : Math.min(6, certificates.length)}
-                </p>
+            </div>
+            
+            <div className={`cert-modal-info ${isTransitioning ? 'transitioning' : ''}`}>
+              <h3 className="cert-modal-title">{selectedCertificate.title}</h3>
+              <div className="cert-modal-meta">
+                <p className="cert-modal-issuer">{selectedCertificate.issuer}</p>
+                <span className="cert-modal-date">{selectedCertificate.date || selectedCertificate.year}</span>
               </div>
+              {selectedCertificate.verifyUrl && (
+                <a 
+                  href={selectedCertificate.verifyUrl} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="cert-modal-verify"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <FiExternalLink size={14} />
+                  Verify Certificate
+                </a>
+              )}
+              <p className="cert-modal-counter">
+                {currentCertIndex + 1}/{showAllCertificates ? certificates.length : 6}
+              </p>
             </div>
           </div>
-        </div>
+
+          {/* Next Button */}
+          <button 
+            className="cert-modal-nav cert-modal-next"
+            onClick={handleNextCert}
+            aria-label="Next certificate"
+          >
+            <FiArrowLeft size={24} style={{ transform: 'rotate(180deg)' }} />
+          </button>
+        </div>,
+        document.body
       )}
     </section>
   )
