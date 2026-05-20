@@ -450,6 +450,24 @@ export default function Portfolio() {
   const [currentCertIndex, setCurrentCertIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
 
+  // Scroll ke project card yang terakhir dilihat
+  useEffect(() => {
+    const fromProjectDetail = sessionStorage.getItem('fromProjectDetail')
+    const lastViewedProjectId = sessionStorage.getItem('lastViewedProjectId')
+    
+    if (fromProjectDetail === 'true' && lastViewedProjectId) {
+      // Tunggu sebentar agar DOM sudah ter-render
+      setTimeout(() => {
+        const projectCard = document.querySelector(`[data-project-id="${lastViewedProjectId}"]`)
+        if (projectCard) {
+          projectCard.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
+        // Bersihkan sessionStorage setelah scroll
+        sessionStorage.removeItem('lastViewedProjectId')
+      }, 200)
+    }
+  }, [])
+
   // Navigate to previous certificate
   const handlePrevCert = (e) => {
     e.stopPropagation()
@@ -540,7 +558,7 @@ export default function Portfolio() {
         {activeTab === 'projects' && (
           <div className="project-grid-new">
             {projects.map(p => (
-              <div key={p.id} className="project-card-new card">
+              <div key={p.id} className="project-card-new card" data-project-id={p.id}>
                 <div className="project-image-wrap">
                   {p.image ? (
                     <img src={p.image} alt={p.title} className="project-image" />
@@ -567,9 +585,9 @@ export default function Portfolio() {
                       to={`/project/${p.id}`} 
                       className="btn-project-secondary"
                       onClick={() => {
-                        // Simpan scroll position dan flag bahwa user dari project detail
-                        sessionStorage.setItem('portfolioScrollPos', window.scrollY)
+                        // Simpan project ID dan flag bahwa user dari project detail
                         sessionStorage.setItem('fromProjectDetail', 'true')
+                        sessionStorage.setItem('lastViewedProjectId', p.id)
                       }}
                     >
                       Details →

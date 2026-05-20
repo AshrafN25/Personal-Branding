@@ -11,18 +11,20 @@ function ScrollToTop() {
   useEffect(() => {
     // Cek apakah user dari project detail
     const fromProjectDetail = sessionStorage.getItem('fromProjectDetail')
-    const savedScrollPos = sessionStorage.getItem('portfolioScrollPos')
+    const lastViewedProjectId = sessionStorage.getItem('lastViewedProjectId')
     
-    // Scenario 1: Kembali dari project detail dengan scroll position tersimpan
-    if (fromProjectDetail === 'true' && savedScrollPos) {
+    // Scenario 1: Kembali dari project detail dengan project ID - biarkan Portfolio.jsx handle scroll
+    if (fromProjectDetail === 'true' && lastViewedProjectId) {
+      // Scroll ke section portfolio dulu, baru Portfolio.jsx akan scroll ke card specific
       setTimeout(() => {
-        window.scrollTo({ top: parseInt(savedScrollPos), behavior: 'instant' })
-        // Bersihkan sessionStorage setelah restore
+        const element = document.querySelector(hash || '#portfolio')
+        if (element) {
+          element.scrollIntoView({ behavior: 'instant', block: 'start' })
+        }
         sessionStorage.removeItem('fromProjectDetail')
-        sessionStorage.removeItem('portfolioScrollPos')
-      }, 100)
+      }, 50)
     }
-    // Scenario 2: Kembali dari project detail tanpa scroll position (gunakan hash)
+    // Scenario 2: Kembali dari project detail tanpa project ID - scroll ke section portfolio
     else if (fromProjectDetail === 'true' && hash) {
       setTimeout(() => {
         const element = document.querySelector(hash)
@@ -37,7 +39,7 @@ function ScrollToTop() {
       window.scrollTo(0, 0)
       // Bersihkan sessionStorage
       sessionStorage.removeItem('fromProjectDetail')
-      sessionStorage.removeItem('portfolioScrollPos')
+      sessionStorage.removeItem('lastViewedProjectId')
     }
   }, [pathname, hash])
 
