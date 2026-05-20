@@ -450,17 +450,6 @@ export default function Portfolio() {
   const [currentCertIndex, setCurrentCertIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
 
-  // Restore scroll position saat kembali dari project detail
-  useEffect(() => {
-    const savedScrollPos = sessionStorage.getItem('portfolioScrollPos')
-    if (savedScrollPos) {
-      setTimeout(() => {
-        window.scrollTo(0, parseInt(savedScrollPos))
-        sessionStorage.removeItem('portfolioScrollPos')
-      }, 100)
-    }
-  }, [])
-
   // Navigate to previous certificate
   const handlePrevCert = (e) => {
     e.stopPropagation()
@@ -578,8 +567,9 @@ export default function Portfolio() {
                       to={`/project/${p.id}`} 
                       className="btn-project-secondary"
                       onClick={() => {
-                        // Simpan scroll position sebelum navigate
+                        // Simpan scroll position dan flag bahwa user dari project detail
                         sessionStorage.setItem('portfolioScrollPos', window.scrollY)
+                        sessionStorage.setItem('fromProjectDetail', 'true')
                       }}
                     >
                       Details →

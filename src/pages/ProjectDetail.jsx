@@ -121,7 +121,13 @@ export default function ProjectDetail() {
     <div className="project-detail-page">
       <div className="project-detail-header">
         <div className="project-detail-container">
-          <button onClick={() => navigate('/#portfolio')} className="btn-back">
+          <button 
+            onClick={() => {
+              sessionStorage.setItem('fromProjectDetail', 'true')
+              navigate('/#portfolio')
+            }} 
+            className="btn-back"
+          >
             <FiArrowLeft size={20} />
             Back to Portfolio
           </button>
