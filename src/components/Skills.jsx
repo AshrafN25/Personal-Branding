@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { FiCode, FiTool, FiLayers, FiUsers, FiGlobe, FiPackage, FiZap, FiCircle, FiEdit3, FiGitBranch, FiTerminal, FiServer, FiRadio, FiMonitor, FiTrendingUp, FiCheckSquare, FiBook, FiFeather, FiMessageCircle, FiTarget, FiSettings, FiAward, FiCalendar } from 'react-icons/fi'
+import { FiCode, FiTool, FiLayers, FiUsers, FiTrendingUp, FiCheckSquare, FiBook, FiMessageCircle, FiTarget, FiSettings, FiAward, FiCalendar, FiEdit3, FiTerminal, FiServer, FiMonitor } from 'react-icons/fi'
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaNetworkWired, FaFeatherAlt, FaPalette, FaFigma, FaLinux } from 'react-icons/fa'
 import './Skills.css'
 
 const skillCategories = [
@@ -9,10 +10,10 @@ const skillCategories = [
     icon: <FiCode size={18} />,
     color: '#F1B800',
     skills: [
-      { name: 'HTML5', level: 85, icon: <FiGlobe size={16} /> },
-      { name: 'CSS3', level: 80, icon: <FiPackage size={16} /> },
-      { name: 'JavaScript', level: 60, icon: <FiZap size={16} /> },
-      { name: 'React.js', level: 45, icon: <FiCircle size={16} /> },
+      { name: 'HTML5', level: 85, icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg" alt="HTML5" style={{ width: 16, height: 16, filter: 'brightness(0) invert(1)' }} /> },
+      { name: 'CSS3', level: 80, icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-plain.svg" alt="CSS3" style={{ width: 16, height: 16, filter: 'brightness(0) invert(1)' }} /> },
+      { name: 'JavaScript', level: 60, icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" alt="JavaScript" style={{ width: 16, height: 16, filter: 'brightness(0) invert(1)' }} /> },
+      { name: 'React.js', level: 45, icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" style={{ width: 16, height: 16, filter: 'brightness(0) invert(1)' }} /> },
     ]
   },
   {
@@ -21,10 +22,10 @@ const skillCategories = [
     icon: <FiTool size={18} />,
     color: '#8B5CF6',
     skills: [
-      { name: 'Canva', level: 80, icon: <FiFeather size={16} /> },
-      { name: 'Figma', level: 50, icon: <FiEdit3 size={16} /> },
-      { name: 'Git & GitHub', level: 55, icon: <FiGitBranch size={16} /> },
-      { name: 'VS Code', level: 85, icon: <FiTerminal size={16} /> },
+      { name: 'Canva', level: 80, icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" alt="Canva" style={{ width: 16, height: 16, filter: 'brightness(0) invert(1)' }} /> },
+      { name: 'Figma', level: 50, icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" style={{ width: 16, height: 16, filter: 'brightness(0) invert(1)' }} /> },
+      { name: 'Git & GitHub', level: 55, icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg" alt="Git" style={{ width: 16, height: 16, filter: 'brightness(0) invert(1)' }} /> },
+      { name: 'VS Code', level: 85, icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-plain.svg" alt="VS Code" style={{ width: 16, height: 16, filter: 'brightness(0) invert(1)' }} /> },
     ]
   },
   {
@@ -34,8 +35,8 @@ const skillCategories = [
     color: '#3B82F6',
     skills: [
       { name: 'Cisco Packet Tracer', level: 40, icon: <FiServer size={16} /> },
-      { name: 'Dasar Jaringan', level: 70, icon: <FiRadio size={16} /> },
-      { name: 'Debian', level: 30, icon: <FiMonitor size={16} /> },
+      { name: 'Dasar Jaringan', level: 70, icon: <FaNetworkWired size={16} /> },
+      { name: 'Debian', level: 30, icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-plain.svg" alt="Debian" style={{ width: 16, height: 16, filter: 'brightness(0) invert(1)' }} /> },
     ]
   },
   {
@@ -48,7 +49,7 @@ const skillCategories = [
       { name: 'Mandiri', level: 85, icon: <FiTarget size={16} /> },
       { name: 'Tanggung Jawab', level: 80, icon: <FiCheckSquare size={16} /> },
       { name: 'Cepat Belajar', level: 72, icon: <FiBook size={16} /> },
-      { name: 'Kreatif', level: 78, icon: <FiFeather size={16} /> },
+      { name: 'Kreatif', level: 78, icon: <FaFeatherAlt size={16} /> },
       { name: 'Komunikatif', level: 70, icon: <FiMessageCircle size={16} /> },
     ]
   },

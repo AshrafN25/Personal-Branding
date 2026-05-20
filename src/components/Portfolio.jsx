@@ -40,7 +40,7 @@ const projects = [
     tags: ['HTML', 'CSS', 'JavaScript'],
     image: '/kotasemarang.png',
     github: 'https://github.com/AshrafN25/Kota-Semarang-Web',
-    demo: 'https://kotasemarangku.wuaze.com/?i=1',
+    demo: 'https://kotasemarangku.infinityfreeapp.com/index.html',
   },
   {
     id: 3,
