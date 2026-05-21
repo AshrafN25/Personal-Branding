@@ -57,9 +57,14 @@ export default function Navbar({ activeSection }) {
 
         {/* Right: CTA + Hamburger */}
         <div className="navbar-right">
-          <button className="navbar-cta" onClick={() => scrollTo('cv')}>
+          <a 
+            href="https://drive.google.com/file/d/1YGa5WYCQEG2-hU8mW-t1_zv_xuFDnZD2/view?usp=sharing" 
+            target="_blank" 
+            rel="noreferrer"
+            className="navbar-cta"
+          >
             Download CV
-          </button>
+          </a>
           <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
             {menuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
           </button>
@@ -77,9 +82,14 @@ export default function Navbar({ activeSection }) {
             {link.label}
           </button>
         ))}
-        <button className="btn-primary mobile-cta" onClick={() => scrollTo('cv')}>
+        <a 
+          href="https://drive.google.com/file/d/1YGa5WYCQEG2-hU8mW-t1_zv_xuFDnZD2/view?usp=sharing" 
+          target="_blank" 
+          rel="noreferrer"
+          className="btn-primary mobile-cta"
+        >
           Download CV
-        </button>
+        </a>
       </div>
     </nav>
   )

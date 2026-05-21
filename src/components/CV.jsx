@@ -2,11 +2,16 @@ import { FiDownload, FiUser, FiBook, FiAward, FiCode, FiMapPin, FiMail, FiPhone 
 import './CV.css'
 
 const personalData = [
-  { icon: <FiUser size={14} />, label: 'Nama Lengkap', value: 'Ashraf Nauval Rasya' },
-  { icon: <FiMapPin size={14} />, label: 'Kota', value: 'Semarang, Jawa Tengah' },
-  { icon: <FiBook size={14} />, label: 'Sekolah', value: 'SMKN 7 Semarang' },
+  { label: 'Tempat / Tanggal Lahir', value: 'Semarang, 25 Januari 2009' },
+  { label: 'Jenis Kelamin', value: 'Laki-Laki' },
+  { label: 'Profesi', value: 'Pelajar' },
+  { label: 'Kewarganegaraan', value: 'Indonesia' },
+]
+
+const contactData = [
+  { icon: <FiPhone size={14} />, label: 'Telepon', value: '0851 - 8312 - 5336' },
   { icon: <FiMail size={14} />, label: 'Email', value: 'ashrafnauval25@gmail.com' },
-  { icon: <FiPhone size={14} />, label: 'Telepon', value: '+62 851-8312-5336' },
+  { icon: <FiMapPin size={14} />, label: 'Lokasi', value: 'Kota Semarang, Jawa Tengah, Indonesia' },
 ]
 
 const educationCV = [
@@ -20,12 +25,19 @@ const skillsCV = [
   { name: 'HTML & CSS', level: 85, color: '#F1B800' },
   { name: 'JavaScript', level: 60, color: '#F1B800' },
   { name: 'React.js', level: 45, color: '#F1B800' },
-  { name: 'Cisco Packet Tracer', level: 65, color: '#3B82F6' },
+  { name: 'Cisco Packet Tracer', level: 40, color: '#3B82F6' },
   { name: 'Canva / Figma', level: 80, color: '#8B5CF6' },
   { name: 'Git & GitHub', level: 55, color: '#F1B800' },
 ]
 
 const experienceCV = [
+  {
+    organization: 'Coding Camp 2026 – Full-Stack Web Developer',
+    role: 'Peserta Coding Camp DBS Foundation x Dicoding',
+    period: '2026',
+    desc: 'Berhasil menyelesaikan program Coding Camp 2026 dari DBS Foundation dan Dicoding dengan fokus pada pengembangan website front-end dan back-end serta penguatan soft skills di bidang teknologi.',
+    current: false
+  },
   {
     organization: 'TDS (Team Digital Stemba)',
     role: 'Fotografer & Videografer',
@@ -40,6 +52,18 @@ const experienceCV = [
     desc: 'Menjabat sebagai wakil divisi media di organisasi sekolah, bertugas sebagai fotografer untuk dokumentasi kegiatan, mengedit flyer dan poster acara, membuat konten berita sekolah, serta mengelola publikasi visual untuk berbagai kegiatan SMPN 27 Semarang.',
     current: false
   },
+]
+
+const certificatesCV = [
+  { name: 'Back-End Developer for Beginners', issuer: 'Dicoding', year: '2026' },
+  { name: 'Front-End Web for Beginners', issuer: 'Dicoding', year: '2026' },
+  { name: 'Basic JavaScript Programming', issuer: 'Dicoding', year: '2026' },
+  { name: 'Basic Web Programming', issuer: 'Dicoding', year: '2026' },
+  { name: 'AWS Cloud & Gen AI Fundamentals', issuer: 'Dicoding x AWS', year: '2026' },
+  { name: 'Logic Programming 101', issuer: 'Dicoding', year: '2026' },
+  { name: 'Software Developer Fundamentals', issuer: 'Dicoding', year: '2026' },
+  { name: 'Networking Essentials', issuer: 'Cisco', year: '2026' },
+  { name: 'Matematikdinas', issuer: 'Disdik Kota Semarang', year: '2026' },
 ]
 
 const quote = {
@@ -81,10 +105,15 @@ export default function CV() {
                   </div>
                 </div>
               </div>
-              <button className="btn-primary cv-download" onClick={() => window.print()}>
+              <a 
+                href="https://drive.google.com/file/d/1YGa5WYCQEG2-hU8mW-t1_zv_xuFDnZD2/view?usp=sharing" 
+                target="_blank" 
+                rel="noreferrer"
+                className="btn-primary cv-download"
+              >
                 <FiDownload size={16} />
                 Download CV
-              </button>
+              </a>
             </div>
 
             <div className="cv-body">
@@ -94,14 +123,29 @@ export default function CV() {
                 <div className="cv-section-block">
                   <h3 className="cv-section-title">
                     <FiUser size={16} />
-                    Data Pribadi
+                    Data Diri
                   </h3>
                   <div className="cv-personal-list">
                     {personalData.map((item, i) => (
+                      <div key={i} className="cv-personal-item-simple">
+                        <span className="cv-personal-label">{item.label}</span>
+                        <span className="cv-personal-value">{item.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Contact Data */}
+                <div className="cv-section-block">
+                  <h3 className="cv-section-title">
+                    <FiPhone size={16} />
+                    Kontak
+                  </h3>
+                  <div className="cv-personal-list">
+                    {contactData.map((item, i) => (
                       <div key={i} className="cv-personal-item">
                         <span className="cv-personal-icon">{item.icon}</span>
                         <div>
-                          <span className="cv-personal-label">{item.label}</span>
                           <span className="cv-personal-value">{item.value}</span>
                         </div>
                       </div>
@@ -113,7 +157,7 @@ export default function CV() {
                 <div className="cv-section-block">
                   <h3 className="cv-section-title">
                     <FiCode size={16} />
-                    Keahlian
+                    Skills
                   </h3>
                   <div className="cv-skills-list">
                     {skillsCV.map((skill, i) => (
@@ -194,6 +238,25 @@ export default function CV() {
                             {exp.role}
                           </p>
                           <p className="cv-edu-desc">{exp.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Certificates */}
+                <div className="cv-section-block">
+                  <h3 className="cv-section-title">
+                    <FiAward size={16} />
+                    Sertifikat
+                  </h3>
+                  <div className="cv-certificates-list">
+                    {certificatesCV.map((cert, i) => (
+                      <div key={i} className="cv-certificate-item">
+                        <div className="cv-cert-bullet">•</div>
+                        <div className="cv-cert-content">
+                          <span className="cv-cert-name">{cert.name}</span>
+                          <span className="cv-cert-issuer">{cert.issuer} ({cert.year})</span>
                         </div>
                       </div>
                     ))}

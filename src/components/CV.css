@@ -389,3 +389,70 @@
     padding: 28px 20px;
   }
 }
+
+/* Certificates List */
+.cv-certificates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cv-certificate-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 8px 0;
+}
+
+.cv-cert-bullet {
+  color: var(--accent-gold);
+  font-size: 20px;
+  line-height: 1;
+  margin-top: -2px;
+  flex-shrink: 0;
+}
+
+.cv-cert-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.cv-cert-name {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.cv-cert-issuer {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Personal Item Simple (without icon) */
+.cv-personal-item-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cv-personal-item-simple:last-child {
+  border-bottom: none;
+}
+
+.cv-personal-item-simple .cv-personal-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.cv-personal-item-simple .cv-personal-value {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 400;
+}
