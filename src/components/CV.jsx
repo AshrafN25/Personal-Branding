@@ -63,7 +63,7 @@ const certificatesCV = [
   { name: 'Logic Programming 101', issuer: 'Dicoding', year: '2026' },
   { name: 'Software Developer Fundamentals', issuer: 'Dicoding', year: '2026' },
   { name: 'Networking Essentials', issuer: 'Cisco', year: '2026' },
-  { name: 'Matematikdinas', issuer: 'Disdik Kota Semarang', year: '2026' },
+  { name: 'Matematikdinas', issuer: 'Disdik Kota Semarang', year: '2024' },
 ]
 
 const quote = {
